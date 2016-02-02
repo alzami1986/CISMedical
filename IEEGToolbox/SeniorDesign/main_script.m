@@ -1,5 +1,8 @@
 %iteration for 10s clip
-[dataset,data_clip] = analyzeData('I001_P002_D01',0,60);
+
+start_time = 353251.55;
+end_time = 353689.00;
+[dataset,data_clip] = analyzeData('I001_P002_D01',start_time,600);
 
 A = data_clip;
 [M, N] = size(data_clip);

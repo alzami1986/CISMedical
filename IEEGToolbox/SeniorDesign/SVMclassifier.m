@@ -1,18 +1,26 @@
 %% SVM Classifier
 % get data 
 
-fileID = fopen('009586124_1_143873_[2015 6 13]_[5 0 43].bin'); 
-A = fread(fileID, [18,inf]); 
-A = A'; 
-fclose(fileID); 
+% fileID = fopen('009586124_1_143873_[2015 6 13]_[5 0 43].bin'); 
+% A = fread(fileID, [18,inf]); 
+% A = A'; 
+% fclose(fileID); 
 
-valsPerSec = length(A)/(5*60); %aka fs = sample rate
+start_time = 353251.55;
+end_time = 353689.00;
+[dataset,data_clip] = analyzeData('I001_P002_D01',start_time,600);
+
+A = data_clip;
+[M, N] = size(data_clip);
+
+numMinutes = 10;
+valsPerSec = length(A)/(numMinutes*60); %aka fs = sample rate
 windowSize = 10; %size of window in seconds
 valsPerWindow = round(valsPerSec * windowSize); 
-numWindows = 5*60/10; 
+numWindows = numMinutes*60/10; 
 
-results = zeros(numWindows,18);
-energy = zeros(numWindows, 18);
+results = zeros(numWindows, N);
+energy = zeros(numWindows, N);
 
 for i = 1:numWindows
     

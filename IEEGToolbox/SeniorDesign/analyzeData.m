@@ -10,13 +10,17 @@ function [dataset,data_clip] = analyzeData(dataID, start, duration)
     dataset = session.data;
     
     %pull 'duration' worth of data from given start in s
-    data_clip = dataset.getvalues(start*1e6,duration*1e6, ':'); 
-end
-
-    %layerNames = {dataset.annLayer.name};
-    %ind=find(ismember(layerNames,'Seizure_CCS'));
-    % ann = dataset.annLayer(0).getEvents(0); % might need to use a different annLayer
-    % start_times = {ann.start};
-    % stop_times = {ann.stop};
+    data_clip = dataset.getvalues(start*1e6,duration*1e6, ':');
+    
+    layerNames = {dataset.annLayer.name};
+%     ind=find(ismember(layerNames,'Seizure_CCS'));
+    ann = dataset.annLayer(1).getEvents(1); % might need to use a different annLayer
+    start_times = {ann.start};
+    stop_times = {ann.stop};
+    stop = stop_times{2};
+    start = start_times{2};
+    seizure_duration = (stop - start) / 1e6; % put into seconds
 
     % use dataset.methods to see options
+end
+

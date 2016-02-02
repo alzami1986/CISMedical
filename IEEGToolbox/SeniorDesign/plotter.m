@@ -1,5 +1,18 @@
-function f = plotter(results)
-    AA = results;
+function f = plotter(results, data)
+    [M, N] = size(data); %M - rows, N - cols
+    dataAvg = mean(data,2); 
+    plot(dataAvg);
+    hold on; 
+    
+    featureMean = mean(results,2); h
+    plot(repelem(featureMean,M)); 
+%     for i=1:N
+%         plot(data(:,i));
+%         hold on; 
+%     end
+
+
+% AA = results;
 %     AB = results(:,2);
 %     AC = results(:,3); 
 %     AD = results(:,4);
@@ -18,7 +31,7 @@ function f = plotter(results)
 %     AQ = results(:,17);
 %     AR = results(:,18); 
 
-    plot(AA);
+ %   plot(AA);
 %     hold on;
 %     plot(AB); 
 %     hold on ;

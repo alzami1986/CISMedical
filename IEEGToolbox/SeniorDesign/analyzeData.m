@@ -14,12 +14,7 @@ function [dataset,data_clip] = analyzeData(dataID, start, duration)
     
     layerNames = {dataset.annLayer.name};
 %     ind=find(ismember(layerNames,'Seizure_CCS'));
-    ann = dataset.annLayer(1).getEvents(1); % might need to use a different annLayer
-    start_times = {ann.start};
-    stop_times = {ann.stop};
-    stop = stop_times{2};
-    start = start_times{2};
-    seizure_duration = (stop - start) / 1e6; % put into seconds
+
 
     % use dataset.methods to see options
 end

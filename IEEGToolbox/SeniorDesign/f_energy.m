@@ -36,7 +36,8 @@ function output = f_energy(data, startIndex, endIndex,fs)
 %   end
   
 %output = [timeOut featureOut];
-output = featureOut(end,:); 
+[a,b] = size(featureOut);
+output = featureOut(a,:); 
   %%---  feature creation and data processing
   %%-----------------------------------------
 end

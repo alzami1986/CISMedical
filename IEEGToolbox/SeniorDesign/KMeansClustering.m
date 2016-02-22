@@ -1,33 +1,34 @@
-% get data 
-fileID = fopen('009586124_1_143873_[2015 6 13]_[5 0 43].bin'); 
-A = fread(fileID, [18,inf]); 
-A = A'; 
-fclose(fileID); 
+% % get data 
+% fileID = fopen('009586124_1_143873_[2015 6 13]_[5 0 43].bin'); 
+% A = fread(fileID, [18,inf]); 
+% A = A'; 
+% fclose(fileID); 
+% 
+% valsPerSec = length(A)/(5*60); %aka fs = sample rate
+% windowSize = 10; %size of window in seconds
+% valsPerWindow = round(valsPerSec * windowSize); 
+% numWindows = 5*60/10; 
+% 
+% results = zeros(numWindows,18);
+% energy = zeros(numWindows, 18);
+% 
+% for i = 1:numWindows
+%     
+%     startIndex = (i-1)*valsPerWindow + 1;
+%     endIndex = i*valsPerWindow;
+%     result = f_line_length(A,startIndex,endIndex,valsPerSec); 
+%     results(i,:) = result; 
+%     singleEnergy = f_energy(A, startIndex,endIndex,valsPerSec);
+%     energy(i,:) = singleEnergy; 
+% 
+% end
+% 
+% % training data on first channel
+% energy1 = energy(:,1);
+% result1 = results(:,1);
+% X = [ result1 energy1 ];
 
-valsPerSec = length(A)/(5*60); %aka fs = sample rate
-windowSize = 10; %size of window in seconds
-valsPerWindow = round(valsPerSec * windowSize); 
-numWindows = 5*60/10; 
-
-results = zeros(numWindows,18);
-energy = zeros(numWindows, 18);
-
-for i = 1:numWindows
-    
-    startIndex = (i-1)*valsPerWindow + 1;
-    endIndex = i*valsPerWindow;
-    result = f_line_length(A,startIndex,endIndex,valsPerSec); 
-    results(i,:) = result; 
-    singleEnergy = f_energy(A, startIndex,endIndex,valsPerSec);
-    energy(i,:) = singleEnergy; 
-
-end
-
-% training data on first channel
-energy1 = energy(:,1);
-result1 = results(:,1);
-X = [ result1 energy1 ];
-
+X = [ mean(line_lengths,2) mean(energy,2) ];
 % original data plot
 
 figure
@@ -38,14 +39,14 @@ ylabel('Energy')
 
 % k-means algorithm and plot
 rng(1); % For reproducibility
-[idx,C] = kmeans(X,3);
+[idx,C] = kmeans(X,4);
 
-x1 = min(X(:,1)):100:max(X(:,1));
-x2 = min(X(:,2)):100:max(X(:,2));
+x1 = min(X(:,1)):3:max(X(:,1));
+x2 = min(X(:,2)):3:max(X(:,2));
 [x1G,x2G] = meshgrid(x1,x2);
 XGrid = [x1G(:),x2G(:)]; % Defines a fine grid on the plot
 
-idx2Region = kmeans(XGrid,3,'MaxIter',1000,'Start',C);...
+idx2Region = kmeans(XGrid,4,'MaxIter',1000,'Start',C);...
     % Assigns each node in the grid to the closest centroid
 
 figure;

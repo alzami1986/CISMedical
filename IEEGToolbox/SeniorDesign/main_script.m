@@ -23,14 +23,14 @@ for i = 1:numWindows
     endIndex = min(i*valsPerWindow,M); 
     disp(endIndex); 
     
-%     line_length = f_line_length(data_clip,startIndex,endIndex,valsPerSec); 
-%     line_lengths(i,:) = line_length; 
-%     
-%     singleEnergy = f_energy(data_clip, startIndex,endIndex,valsPerSec);
-%     energy(i,:) = singleEnergy; 
+    line_length = f_line_length(data_clip,startIndex,endIndex,valsPerSec); 
+     line_lengths(i,:) = line_length; 
+     
+     singleEnergy = f_energy(data_clip, startIndex,endIndex,valsPerSec);
+     energy(i,:) = singleEnergy; 
 
-    corr_coeff = f_corr_coeff(data_clip, startIndex,endIndex,valsPerSec);
-    corr_coeffs(i,:) = corr_coeff; 
+   % corr_coeff = f_corr_coeff(data_clip, startIndex,endIndex,valsPerSec);
+   % corr_coeffs(i,:) = corr_coeff; 
     
 
     disp('================'); 

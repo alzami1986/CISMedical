@@ -7,20 +7,19 @@ function output = f_corr_coeff(data, startIndex, endIndex,fs)
   data = high_pass_filter(data, fs);
   data = low_pass_filter(data, fs);
   
- featureOut = paramsFunction(data(startIndex:endIndex, :));
+ %featureOut = paramsFunction(data(startIndex:endIndex, :));
+
+ if endIndex > x
+     featureOut = paramsFunction(data(startIndex:x,:));
+ else
+     featureOut = paramsFunction(data(startIndex:endIndex,:));
+ end 
 
   
-  %for each column...
-  for w = 1:endIndex
-    if endIndex > x
-       %featureOut(w,1) = paramsFunction(data(w, :));
-       break;
-    else 
-       featureOut(w,1) = paramsFunction(data(w, :));
-    end 
-  end
-  
-  output = featureOut; 
+  manipFeature = tril(featureOut,-1);
+  manipFeature = reshape(manipFeature,1,[]);
+  manipFeature = manipFeature(manipFeature~=0);
+  output = manipFeature; 
   
 end
 

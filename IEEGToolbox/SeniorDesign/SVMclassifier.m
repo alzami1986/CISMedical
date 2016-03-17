@@ -149,5 +149,3 @@ disp(['SVM Precision: ', num2str(precision)]);
 
 
 % test data on first channel
-
-

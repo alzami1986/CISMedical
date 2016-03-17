@@ -5,8 +5,8 @@ function output = f_energy(data, startIndex, endIndex,fs)
 
 
   % filter then normalize each channel by std of entire data block
-  data = high_pass_filter(data, fs);
-  data = low_pass_filter(data, fs);
+%   data = high_pass_filter(data, fs);
+%   data = low_pass_filter(data, fs);
   %rmsdata = rms(data,1);
   %filtOut = data ./ repmat(rmsdata,size(data,1),1);
 

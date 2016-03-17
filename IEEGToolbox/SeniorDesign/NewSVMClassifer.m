@@ -15,7 +15,7 @@ finalX = [];
 finalY = [];
 
 tic
-for t = 1:144
+for t = 1:772
     disp([ 'Iteration: ', num2str(t) ]);
 
     [dataset,data_clip] = analyzeData('I001_P002_D01',start_time,duration);
@@ -86,18 +86,38 @@ for t = 1:144
     start_time = start_time + duration;
 end
 
-Y = logical(Y);
+order = unique(finalY); % Order of the group labels
+cp = cvpartition(finalY,'k',10); % Stratified cross-validation
+
+f = @(xtr,ytr,xte,yte)confusionmat(yte,...
+classify(xte,xtr,ytr),'order',order);
+
+finalY = logical(finalY);
+cfMat = crossval(f,finalX,finalY,'partition',cp);
+cfMat = reshape(sum(cfMat),2,2)
+
+TP = cfMat(1,1);
+FP = cfMat(1,2);
+TN = cfMat(2,2);
+FN = cfMat(2,1);
+
+precision = TP / (TP + FP);
+accuracy = (TP + TN) / (TP + FP + TN + FN);
+disp(['LDA CVAL Accuracy: ', num2str(accuracy)]);
+disp(['LDA Precision: ', num2str(precision)]);
+
+finalY = logical(finalY);
 cost.ClassNames = logical([1,0]);
 cost.ClassificationCosts = [0 5; 1 0];
 % 'ClassNames',logical([1,0])
-SVMModel = fitcsvm(finalX,finalY,'Standardize',true);
+SVMModel = fitcsvm(finalX,finalY,'Standardize',true,'ClassNames',logical([0,1]),'Cost',[0,5;1,0]);
 
 % create SVM ROC curve
 
 % Note: Cannot generate curve when only 1 class appears in training data set
 % mdlSVM = fitPosterior(SVMModel);
 % [~,score_svm] = resubPredict(mdlSVM);
-% [Xsvm,Ysvm,Tsvm,AUCsvm] = perfcurve(Y,score_svm(:,mdlSVM.ClassNames),'true');
+% [Xsvm,Ysvm,Tsvm,AUCsvm] = perfcurve(finalY,score_svm(:,mdlSVM.ClassNames),'true');
 
 % plotting support vectors and datapoints
 % sv = SVMModel.SupportVectors;
@@ -118,15 +138,30 @@ SVMModel = fitcsvm(finalX,finalY,'Standardize',true);
 % title('ROC Curves for SVM')
 % hold off
 
+% try svmclassify
+f = @(xtr,ytr,xte,yte)confusionmat(yte,...
+svmclassify(svmtrain(xtr, ytr),xte));
+cfMat = crossval(f,finalX,finalY,'partition',cp);
+cfMat = reshape(sum(cfMat),2,2)
+
+TP = cfMat(1,1);
+FP = cfMat(1,2);
+TN = cfMat(2,2);
+FN = cfMat(2,1);
+
+precision = TP / (TP + FP);
+accuracy = (TP + TN) / (TP + FP + TN + FN);
+disp(['SVM CVAL Accuracy: ', num2str(accuracy)]);
+disp(['SVM Precision: ', num2str(precision)]);
+
 CVSVMModel = crossval(SVMModel);
 misclass1 = kfoldLoss(CVSVMModel);
 
-disp(['SVM CVal Accuracy: ' num2str(1.0 - misclass1)]);
 toc
 %% Test second part of seizure data for new predictions
 % load linelength
 % load energy
-start_time = 353251.55;
+% start_time = 353251.55;
 % [dataset,data_clip] = analyzeData('I001_P002_D01',start_time,duration);
 % 
 % A = data_clip;
@@ -163,35 +198,36 @@ start_time = 353251.55;
 % end
 
 
-load linelength
-load energy
-newX = [ line_lengths energy ];
-[label,score] = predict(SVMModel,newX);
-
-for j=1:numWindows
-    Y(j) = 1; % non seizure
-    for k=1:cell_cols
-        seizure_duration = (ann_stop_times{k} - ann_start_times{k}) / 1e6; % put into seconds
-        if seizure_duration == 0
-            continue;
-        end
-        if (start_time + j*10 <= (ann_stop_times{k} / 1e6)) && ...
-                (start_time + j*10 >= (ann_start_times{k} / 1e6))
-            Y(j) = 0; % possible seizure
-            break;
-        end
-    end
-end
-label = logical(label);
-JASON = label == Y; % get accuracy
-accuracy = nnz(JASON) / 60;
-
-[C,order] = confusionmat(Y,label);
-TP = (C(1,1) + C(2,2));
-FP = C(1,2);
-precision = TP / (TP + FP);
-disp(['SVM Prediction Accuracy: ', num2str(accuracy)]);
-disp(['SVM Precision: ', num2str(precision)]);
+% load linelength
+% load energy
+% newX = [ line_lengths energy ];
+% [label,score] = predict(SVMModel,newX);
+% 
+% for j=1:numWindows
+%     Y(j) = 1; % non seizure
+%     for k=1:cell_cols
+%         seizure_duration = (ann_stop_times{k} - ann_start_times{k}) / 1e6; % put into seconds
+%         if seizure_duration == 0
+%             continue;
+%         end
+%         if (start_time + j*10 <= (ann_stop_times{k} / 1e6)) && ...
+%                 (start_time + j*10 >= (ann_start_times{k} / 1e6))
+%             Y(j) = 0; % possible seizure
+%             break;
+%         end
+%     end
+% end
+% Y = logical(Y);
+% label = logical(label);
+% JASON = label == Y; % get accuracy
+% accuracy = nnz(JASON) / 60;
+% 
+% [C,order] = confusionmat(Y,label);
+% TP = (C(1,1));
+% FP = C(1,2);
+% precision = TP / (TP + FP);
+% disp(['SVM Prediction Accuracy: ', num2str(accuracy)]);
+% disp(['SVM Precision: ', num2str(precision)]);
 
 
 toc

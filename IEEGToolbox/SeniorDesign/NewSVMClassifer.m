@@ -14,13 +14,16 @@ disp([ 'Session Name: ', session_name ]);
 finalX = [];
 finalY = [];
 
+session = IEEGSession('I001_P002_D01', 'indaso', 'ind_ieeglogin');
+dataset = session.data;
+
 tic
-for t = 1:772
+for t = 1:144
     disp([ 'Iteration: ', num2str(t) ]);
 
-    [dataset,data_clip] = analyzeData('I001_P002_D01',start_time,duration);
+    data_clip = dataset.getvalues(start_time*1e6,duration*1e6, ':');
     A = data_clip;
-    [M, N] = size(data_clip);
+    [M, N] = size(A);
     
     %     numMinutes = (duration/60)*(t+1);
     numMinutes = (duration/60);
@@ -55,7 +58,7 @@ for t = 1:772
     % training data on avg of channels
     % load linelength1
     % load energy1
-    X = [ line_lengths energy ];
+    X = line_lengths;
     
     % load feature_data
     Y = zeros(60,1);
@@ -232,3 +235,4 @@ toc
 
 toc
 % test data on first channel
+

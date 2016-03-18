@@ -14,6 +14,9 @@ duration = 600; % in seconds
 % finalX = [];
 % finalY = [];
 
+session = IEEGSession('I001_P002_D01', 'indaso', 'ind_ieeglogin');
+dataset = session.data;
+
 tic
 [finalX, finalY] = extractFeatures(start_time, duration);
 toc

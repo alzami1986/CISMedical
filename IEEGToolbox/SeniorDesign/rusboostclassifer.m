@@ -14,10 +14,6 @@ start_time = 3.356174348000000e+11 / 1e6;
 load finalXHalf
 load finalYHalf
 
-vector = ~any(isnan(finalX),2);
-finalX = finalX(vector,:);
-finalY = finalY(vector);
-
 part = cvpartition(finalY,'holdout',0.5);
 istrain = training(part); % data for fitting
 istest = test(part); % data for quality assessment

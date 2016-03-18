@@ -18,15 +18,11 @@ session = IEEGSession('I001_P002_D01', 'indaso', 'ind_ieeglogin');
 dataset = session.data;
 
 tic
-[finalX, finalY] = extractFeatures(start_time, duration);
+[finalX, finalY] = extractFeatures(dataset, start_time, duration);
 toc
 
 % load finalXDay
 % load finalYDay
-
-vector = ~any(isnan(finalX),2);
-finalX = finalX(vector,:);
-finalY = finalY(vector);
 
 order = unique(finalY); % Order of the group labels
 cp = cvpartition(finalY,'k',10); % Stratified cross-validation

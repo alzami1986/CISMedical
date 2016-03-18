@@ -10,43 +10,15 @@ session_name = session_names(r,:);
 start_time = 3.356174348000000e+11 / 1e6;
 % start_time = 0;
 % end_time = 353689.00;
-disp([ 'Session Name: ', session_name ]);
-% [dataset,data_clip] = analyzeData('I001_P002_D01',start_time,600);
 
-% [dataset,data_clip] = analyzeData(session_name,start_time,600);
+load finalXHalfDay
+load finalYHalfDay
 
-A = data_clip;
-[M, N] = size(data_clip);
-
-numMinutes = 10;
-valsPerSec = length(A)/(numMinutes*60); %aka fs = sample rate
-windowSize = 10; %size of window in seconds
-valsPerWindow = round(valsPerSec * windowSize); 
-numWindows = numMinutes*60/10; 
-
-line_lengths = zeros(numWindows, N);
-energy = zeros(numWindows, N);
-
-% for i = 1:numWindows
-%     
-%     startIndex = (i-1)*valsPerWindow + 1;
-% %     disp(startIndex);
-%     endIndex = i*valsPerWindow; 
-%     disp([num2str(endIndex / M * 100) '%'] ); 
-%     
-%     line_length = f_line_length(A,startIndex,endIndex,valsPerSec); 
-%     line_lengths(i,:) = line_length; 
-%     
-%     singleEnergy = f_energy(A, startIndex,endIndex,valsPerSec);
-%     energy(i,:) = singleEnergy; 
-% 
-%     disp('================'); 
-% end
+vector = ~any(isnan(finalX),2);
+finalX = finalX(vector,:);
+finalY = finalY(vector);
 
 % training data on avg of channels
-load linelength1
-load energy1
-X = [ line_lengths energy ];
 Y = zeros(60,1);
 
 ann = dataset.annLayer(1).getEvents(1); % might need to use a different annLayer

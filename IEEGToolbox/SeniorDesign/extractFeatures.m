@@ -1,9 +1,10 @@
 function [finalX,finalY] = extractFeatures(dataset, start_time, duration)
 
 finalX = [];
-finalY = [];
-for t = 1:72
+finalY = '';
+for t = 1:2154 % 72 for half a day, 864 for full day on 1st patient, 280, 7118 3rd patient
     disp([ 'Iteration: ', num2str(t) ]);
+    disp([ 'Start_time: ', num2str(start_time) ]);
     try
         data_clip = dataset.getvalues(start_time*1e6,duration*1e6, ':');
     catch
@@ -11,7 +12,13 @@ for t = 1:72
             data_clip = dataset.getvalues(start_time*1e6,duration*1e6, ':');
             
         catch
-            data_clip = dataset.getvalues(start_time*1e6,duration*1e6, ':');
+            try
+                data_clip = dataset.getvalues(start_time*1e6,duration*1e6, ':');
+            catch
+                disp([ 'Error with segment. Skipping ', 'start_time: ', num2str(start_time) ]);
+                start_time = start_time + duration;
+                continue;
+            end
             
         end
     end
@@ -56,7 +63,7 @@ for t = 1:72
     X = [ line_lengths energy ];
     
     % load feature_data
-    Y = zeros(60,1);
+    Y = '';
     
     ann = dataset.annLayer(1).getEvents(1); % might need to use a different annLayer
     ann_start_times = {ann.start};
@@ -66,7 +73,7 @@ for t = 1:72
     
     % Get corresponding labels for training instances
     for j=1:numWindows
-        Y(j) = 0; % non seizure
+        region = 'non-seizure'; % non seizure
         for k=1:cell_cols
             seizure_duration = (ann_stop_times{k} - ann_start_times{k}) / 1e6; % put into seconds
             if seizure_duration == 0
@@ -74,20 +81,25 @@ for t = 1:72
             end
             if (start_time + j*10 <= (ann_stop_times{k} / 1e6)) && ...
                     (start_time + j*10 >= (ann_start_times{k} / 1e6))
-                Y(j) = 1; % possible seizure (changed to 0 from -1)
+                region = 'possible seizure'; % possible seizure (changed to 0 from -1)
                 break;
             end
         end
+        Y = char(Y, region);
     end
+    Y = Y(2:end,:);
     finalX = [ finalX; X ];
-    finalY = [ finalY; Y ];
+    finalY = char(finalY, Y);
     start_time = start_time + duration;
+    save('finalXFullSignal33.mat','finalX')
+    save('finalYFullSignal33.mat','finalY')
 end
+finalY = finalY(2:end,:);
+finalY = cellstr(finalY);
+% vector = ~any(isnan(finalX),2);
+% finalX = finalX(vector,:);
+% finalY = finalY(vector);
 
-vector = ~any(isnan(finalX),2);
-finalX = finalX(vector,:);
-finalY = finalY(vector);
-
-save('finalXHalf.mat','finalX')
-save('finalYHalf.mat','finalY')
+save('finalXFullSignal33.mat','finalX')
+save('finalYFullSignal33.mat','finalY')
 end

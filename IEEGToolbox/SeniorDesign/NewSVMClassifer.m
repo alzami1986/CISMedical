@@ -18,11 +18,31 @@ session = IEEGSession('I001_P002_D01', 'indaso', 'ind_ieeglogin');
 dataset = session.data;
 
 tic
-[finalX, finalY] = extractFeatures(dataset, start_time, duration);
+% [finalX, finalY] = extractFeatures(dataset, start_time, duration);
 toc
 
-% load finalXDay
-% load finalYDay
+load finalXFullSignal
+load finalYFullSignal
+
+XX = length(finalY);
+finalYY = [];
+for l = 1:XX
+    if(finalY(l) == 0)
+        if(l == 1)
+            finalYY = 'non-seizure';
+        else
+            finalYY = char(finalYY, 'non-seizure');
+        end
+    else
+        if(l == 1)
+            finalYY = 'possible seizure';
+        else
+            finalYY = char(finalYY, 'possible seizure');
+        end
+    end
+end
+finalYY = cellstr(finalYY);
+finalY = finalYY;
 
 order = unique(finalY); % Order of the group labels
 cp = cvpartition(finalY,'k',10); % Stratified cross-validation
@@ -30,7 +50,7 @@ cp = cvpartition(finalY,'k',10); % Stratified cross-validation
 f = @(xtr,ytr,xte,yte)confusionmat(yte,...
 classify(xte,xtr,ytr),'order',order);
 
-finalY = logical(finalY);
+% finalY = logical(finalY);
 cfMat = crossval(f,finalX,finalY,'partition',cp);
 cfMat = reshape(sum(cfMat),2,2)
 
@@ -44,11 +64,11 @@ accuracy = (TP + TN) / (TP + FP + TN + FN);
 disp(['LDA CVAL Accuracy: ', num2str(accuracy)]);
 disp(['LDA Precision: ', num2str(precision)]);
 
-finalY = logical(finalY);
-cost.ClassNames = logical([1,0]);
-cost.ClassificationCosts = [0 5; 1 0];
+
+% cost.ClassNames = logical([1,0]);
+% cost.ClassificationCosts = [0 5; 1 0];
 % 'ClassNames',logical([1,0])
-SVMModel = fitcsvm(finalX,finalY,'Standardize',true,'ClassNames',logical([0,1]),'Cost',[0,5;1,0]);
+SVMModel = fitcsvm(finalX,finalY,'Standardize',true,'Cost',[0,5;1,0]);
 
 % create SVM ROC curve
 
@@ -77,6 +97,9 @@ SVMModel = fitcsvm(finalX,finalY,'Standardize',true,'ClassNames',logical([0,1]),
 % hold off
 
 % try svmclassify
+% options = optimset('MaxIter',40000,'Display','iter');
+% options = optimset('Display','final');
+
 f = @(xtr,ytr,xte,yte)confusionmat(yte,...
 svmclassify(svmtrain(xtr, ytr),xte));
 cfMat = crossval(f,finalX,finalY,'partition',cp);

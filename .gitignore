@@ -1,4 +1,4 @@
-.DS_Store
+*DS_Store*
 IEEGToolbox/.DS_Store
 IEEGToolbox/KMeansSeizurePlot.png
 IEEGToolbox/SeizurePlot.png
@@ -14,3 +14,4 @@ IEEGToolbox/SeniorDesign/@IEEGTimeseries/
 IEEGToolbox/SeniorDesign/ind_ieeglogin
 IEEGToolbox/SeniorDesign/lib/
 IEEGToolbox/.DS_Store
+.gitignore~

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload Data</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css">
+    <link href="css/styles.css" rel="stylesheet">
+
+  </head>
+  
+ <body>
+    <div class="wrapper">
+        <div class="box">
+            <div class="column col-sm-10 col-xs-11" id="main">
+            <!-- top nav -->
+                  <div class="navbar navbar-blue navbar-static-top">
+                      <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        </button>
+                        <a href="/home" class="navbar-brand logo">CIS Medical Portal</a>
+                      </div>
+                      <nav class="collapse navbar-collapse" role="navigation">
+                      
+                      <form class="navbar-form navbar-left">
+                          <div class="input-group input-group-sm" style="max-width:360px;">
+                            <input type="text" class="form-control" placeholder="Search Patient" name="srch-term" id="srch-term" onKeyUp="searchSuggest()">
+                          </div>
+                      </form>
+                      
+                      <ul class="nav navbar-nav">
+                        <li>
+                          <a href="/Users/gracewu/Desktop/NewPortal/views/home.html"><i class="glyphicon glyphicon-home"></i> Home</a>
+                        </li>
+                        <li>
+                          <a href="/Users/gracewu/Desktop/NewPortal/views/uploaddata.html"></i> Upload Data</a>
+                        </li>
+                        <li>
+                            <a href="/Users/gracewu/Desktop/NewPortal/views/settings.html"><i class="glyphicon glyphicon-pencil"></i> Settings </a>
+                        </li>
+
+                        <li>
+                          <a href="/Users/gracewu/Desktop/NewPortal/views/login.html"><i class="glyphicon glyphicon-log-out"></i> logout</a>
+                        </li>
+                        </nav>
+                      </nav>
+                  </div>
+                <div class="padding">
+                    <div class="full col-sm-12">
+                    <center> <h1> Upload Data </h1> </center> <br> <br>                           
+
+                    <div class="panel panel-default">  
+                          <div class="panel-heading">
+                            <h4> Basic Information </h4>
+                          </div>
+
+                          <div class="panel-body">
+                                <div class=“col-md-4”>
+                                  <h5> Patient Name </h5>
+                                </div>
+
+                                <div class=“col-md-4”>
+                                    <div class="input-group input-group-sm" style="max-width:360px;">
+                                      <input type="text" class="form-control" placeholder="Search Patient Name" name="srch-term" id="srch-term" onKeyUp="searchSuggest()">
+                                  </form>
+                                </div>
+
+                                <div class=“col-md-4”>
+                                  <a href="/Users/gracewu/Desktop/NewPortal/views/signup.html">Create New Patient Profile </a>
+                                </div>
+
+                                <br>
+
+                                <h5> Upload File </h5>
+                                <div class="fileUpload btn">
+                                    <input type="file" class="upload" />
+                                </div>
+                          </div>
+                    </div>
+
+                    <div class="panel panel-default">  
+                          <div class="panel-heading">
+                            <h4> Record Sharing Preferences </h4>
+                            
+                          </div>
+
+                          <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-1" style = "float: left"> <p> <b> User <p> <b> </div>
+                                    <div class="col-md-3" style = "float: left">
+                                        <form>
+                                        <div class="input-group input-group-sm" style="max-width:360px;">
+                                        <input type="text" class="form-control" placeholder="Search Username" name="srch-term" id="srch-term" onKeyUp="searchSuggest()">
+                                        </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="col-md-2" style = "float: left"> <p> <b> Acess Level <p> <b> </div>
+                                     <div class="col-md-6" style = "float: left"> <p> <b> 
+                                          <select name="accesslevel">
+                                          <option value="physician">View Only</option>
+                                          <option value="nurse">View and Edit</option>
+                                          </select> <p> <b> </div>
+
+                                </div>
+                                <br>
+                                <button type="button" class="btn btn-sm" > Add User </button>
+                                <button type="button" class="btn btn-primary btn-sm" > Complete Upload </button>
+
+                          </div>
+                    </div>
+                    
+
+              </div>
+        </div>
+    </div>
+  </body>
+</html>

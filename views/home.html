@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css">
+    <link href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <script>
+    var source = [];
+    var searchSuggest = function() {
+      console.log("Start search suggest");
+      source = [];
+      $.getJSON("/searchSuggest?searchTerm="+$("#srch-term").val(), function(data) {
+        for(var i = 0; i < data.length; i++) {
+          var item = {
+            label: data[i].firstName + " " + data[i].lastName,
+            value: "/users/" + data[i].userID
+          }
+          source.push(item);
+        }
+        $("#srch-term").autocomplete({
+          source: source,
+          select: function( event, ui) {
+            window.location.href = ui.item.value;
+          }
+        });
+      });
+    };
+    </script>
+
+  </head>
+  
+ <body>
+    <div class="wrapper">
+        <div class="box">
+            <div class="column col-sm-10 col-xs-11" id="main">
+            <!-- top nav -->
+                  <div class="navbar navbar-blue navbar-static-top">
+                      <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        </button>
+                        <a href="/home" class="navbar-brand logo">CIS Medical Portal</a>
+                      </div>
+                      <nav class="collapse navbar-collapse" role="navigation">
+                      
+                      <form class="navbar-form navbar-left">
+                          <div class="input-group input-group-sm" style="max-width:360px;">
+                            <input type="text" class="form-control" placeholder="Search Patient" name="srch-term" id="srch-term" onKeyUp="searchSuggest()">
+                          </div>
+                      </form>
+                      
+                      <ul class="nav navbar-nav">
+                        <li>
+                          <a href="/Users/gracewu/Desktop/NewPortal/views/home.html"><i class="glyphicon glyphicon-home"></i> Home</a>
+                        </li>
+                        <li>
+                          <a href="/Users/gracewu/Desktop/NewPortal/views/uploaddata.html"></i> Upload Data</a>
+                        </li>
+                        <li>
+                            <a href="/Users/gracewu/Desktop/NewPortal/views/settings.html"><i class="glyphicon glyphicon-pencil"></i> Settings </a>
+                        </li>
+
+                        <li>
+                          <a href="/Users/gracewu/Desktop/NewPortal/views/login.html"><i class="glyphicon glyphicon-log-out"></i> logout</a>
+                        </li>
+                        </nav>
+                      </nav>
+                  </div>
+                <div class="padding">
+                    <div class="full col-sm-12">
+                    <center> <h1> Dashboard </h1> </center> <br> <br>                           
+                           <center> <h3> Recent Uploads </h3> </center>
+
+                              <!-- ENTRY 1 -->
+                              <div class="panel panel-default">  
+                                    <div class="panel-heading">
+                                      <h4 class ="pull-right"> 03.20.16 </h4> 
+                                      <h4> Doe, John </h4>
+                                    </div>
+
+                                    <div class="panel-body">
+                                      <div id="contentBox" style="margin:0px auto; width:100%">
+                                          <div id="column1" style="float:left; margin:0; width:30%;">
+                                            <p> Owner: Timothy Sheen </p>
+                                            <p> Data Length: 3 days, 12 hours </p>
+                                          </div>
+
+                                          
+                                          <div id="column2" style="float:left; margin:0;width:60%">
+                                            <img src="/Users/gracewu/Desktop/NewPortal/bar.png" alt="BAR" style="width:560px;height:50px;">
+                                          </div>
+                                      </div>
+                                    </div>
+                              </div>
+
+
+
+                              <!-- ENTRY 2 -->
+                              <div class="panel panel-default">  
+                                    <div class="panel-heading">
+                                      <h4 class ="pull-right"> 03.10.16 </h4> 
+                                      <h4> Smith, Jane </h4>
+                                    </div>
+
+                                    <div class="panel-body">
+                                      <div id="contentBox" style="margin:0px auto; width:100%">
+                                          <div id="column1" style="float:left; margin:0; width:30%;">
+                                            <p> Owner: Alan Moore </p>
+                                            <p> Data Length: 1 days, 2 hours </p>
+                                          </div>
+
+                                          
+                                          <div id="column2" style="float:left; margin:0;width:60%">
+                                            <img src="/Users/gracewu/Desktop/NewPortal/bar.png" alt="BAR" style="width:560px;height:50px;">
+                                          </div>
+                                      </div>
+                                    </div>
+                              </div>
+
+
+                              <!-- ENTRY 3 -->
+                              <div class="panel panel-default">  
+                                    <div class="panel-heading">
+                                      <h4 class ="pull-right"> 02.29.16 </h4> 
+                                      <h4> Pope, Jasmine </h4>
+                                    </div>
+
+                                    <div class="panel-body">
+                                      <div id="contentBox" style="margin:0px auto; width:100%">
+                                          <div id="column1" style="float:left; margin:0; width:30%;">
+                                            <p> Owner: Timothy Sheen </p>
+                                            <p> Data Length: 5 days, 20 hours </p>
+                                          </div>
+
+                                          
+                                          <div id="column2" style="float:left; margin:0;width:60%">
+                                            <img src="/Users/gracewu/Desktop/NewPortal/bar.png" alt="BAR" style="width:560px;height:50px;">
+                                          </div>
+                                      </div>
+                                    </div>
+                             </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+  
+</html>

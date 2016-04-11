@@ -21,28 +21,8 @@ tic
 % [finalX, finalY] = extractFeatures(dataset, start_time, duration);
 toc
 
-load finalXFullSignal
-load finalYFullSignal
-
-XX = length(finalY);
-finalYY = [];
-for l = 1:XX
-    if(finalY(l) == 0)
-        if(l == 1)
-            finalYY = 'non-seizure';
-        else
-            finalYY = char(finalYY, 'non-seizure');
-        end
-    else
-        if(l == 1)
-            finalYY = 'possible seizure';
-        else
-            finalYY = char(finalYY, 'possible seizure');
-        end
-    end
-end
-finalYY = cellstr(finalYY);
-finalY = finalYY;
+load finalXFullSignal3
+load finalYFullSignal3
 
 order = unique(finalY); % Order of the group labels
 cp = cvpartition(finalY,'k',10); % Stratified cross-validation
@@ -60,9 +40,14 @@ TN = cfMat(2,2);
 FN = cfMat(2,1);
 
 precision = TP / (TP + FP);
+recall = TP / (TP + FN);
+F_score = 2 * ((precision * recall) / (precision + recall));
 accuracy = (TP + TN) / (TP + FP + TN + FN);
 disp(['LDA CVAL Accuracy: ', num2str(accuracy)]);
 disp(['LDA Precision: ', num2str(precision)]);
+disp(['LDA Recall: ', num2str(recall)]);
+disp(['LDA F1 Score: ', num2str(F_score)]);
+
 
 
 % cost.ClassNames = logical([1,0]);
@@ -111,9 +96,13 @@ TN = cfMat(2,2);
 FN = cfMat(2,1);
 
 precision = TP / (TP + FP);
+recall = TP / (TP + FN);
 accuracy = (TP + TN) / (TP + FP + TN + FN);
+F_score = 2 * ((precision * recall) / (precision + recall));
 disp(['SVM CVAL Accuracy: ', num2str(accuracy)]);
 disp(['SVM Precision: ', num2str(precision)]);
+disp(['SVM Recall: ', num2str(recall)]);
+disp(['SVM F1 Score: ', num2str(F_score)]);
 
 CVSVMModel = crossval(SVMModel);
 misclass1 = kfoldLoss(CVSVMModel);

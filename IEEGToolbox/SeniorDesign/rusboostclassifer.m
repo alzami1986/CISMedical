@@ -16,11 +16,11 @@ dataset = session.data;
 duration = 150; % 2nd patient dataset
 
 tic
-[finalX, finalY] = extractFeatures(dataset, start_time, duration);
+% [finalX, finalY] = extractFeatures(dataset, start_time, duration);
 toc
 
-% load finalXFullSignal2
-% load finalYFullSignal2
+load finalXFullSignal3
+load finalYFullSignal3
 
 part = cvpartition(finalY,'holdout',0.5);
 istrain = training(part); % data for fitting
@@ -28,7 +28,7 @@ istest = test(part); % data for quality assessment
 
 tic
 t = templateTree('MinLeafSize',5);
-rusTree = fitensemble(finalX(istrain,:),finalY(istrain),'RUSBoost',200,t,...
+rusTree = fitensemble(finalX(istrain,:),finalY(istrain),'RUSBoost',1000,t,...
     'LearnRate',0.1,'nprint',100);
 toc
 
@@ -45,28 +45,53 @@ Yfit = predict(rusTree,finalX(istest,:));
 toc
 tab = tabulate(finalY(istest));
 [cfMat,order] = confusionmat(finalY(istest),Yfit),tab(:,2)
+%{
+finalYYY = [];
+finalYfit = [];
+LL = finalY(istest);
+NN = length(LL);
 
+parfor i = 1:NN
+    if(strcmp(LL(i),'non-seizure'))
+        finalYYY = [finalYYY; 1];
+    else
+        finalYYY = [finalYYY; 0];
+    end
+end
+parfor i = 1:NN
+    if(strcmp(Yfit(i),'non-seizure'))
+        finalYfit = [finalYfit; 1];
+    else
+        finalYfit = [finalYfit; 0];
+    end
+end
+plotconfusion(finalYYY,finalYfit);
+%}
 TP = cfMat(1,1);
 FP = cfMat(1,2);
 TN = cfMat(2,2);
 FN = cfMat(2,1);
 
 precision = TP / (TP + FP);
+recall = TP / (TP + FN);
+F_score = 2 * ((precision * recall) / (precision + recall));
 accuracy = (TP + TN) / (TP + FP + TN + FN);
 
 disp(['rusboost CVAL Accuracy: ', num2str(accuracy)]);
 disp(['rusboost Precision: ', num2str(precision)]);
+disp(['rusboost Recall: ', num2str(recall)]);
+disp(['rusboost F1 Score: ', num2str(F_score)]);
 
 cmpctRus = compact(rusTree);
 
 sz(1) = whos('rusTree');
-% sz(2) = whos('cmpctRus');
-% [sz(1).bytes sz(2).bytes]
+sz(2) = whos('cmpctRus');
+[sz(1).bytes sz(2).bytes]
 
 % cmpctRus = removeLearners(cmpctRus,[300:1000]);
-% 
-% sz(3) = whos('cmpctRus');
-% sz(3).bytes
+
+sz(3) = whos('cmpctRus');
+sz(3).bytes
 
 L = loss(cmpctRus,finalX(istest,:),finalY(istest))
 disp(['rusboost Loss Accuracy: ', num2str(1 - L)]);

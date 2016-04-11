@@ -100,6 +100,6 @@ finalY = cellstr(finalY);
 % finalX = finalX(vector,:);
 % finalY = finalY(vector);
 
-save('finalXFullSignal33.mat','finalX')
-save('finalYFullSignal33.mat','finalY')
+save('finalXFullSignal3.mat','finalX')
+save('finalYFullSignal3.mat','finalY')
 end

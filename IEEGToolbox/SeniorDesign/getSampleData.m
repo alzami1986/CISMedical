@@ -1,4 +1,9 @@
 function [X, Y] = getSampleData(finalX, finalY, NumSamples) 
+if (NumSamples == 0) 
+    X = finalX;
+    Y = finalY;
+    return;
+end
 finalYY = strcmp(finalY, 'possible seizure');
 finalYY = logical(finalYY);
 non_seizure_indices = not(finalYY);

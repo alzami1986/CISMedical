@@ -60,8 +60,8 @@ score_log = mdl.Fitted.Probability; % Probability estimates
 % 'ClassNames',logical([1,0])
 % finalYY = strcmp(finalY,'possible seizure');
 % SVMModel = fitcsvm(finalX,finalYY,'Standardize',true,'Cost',[0,5;1,0]);
-[XX,YY] = getSampleData(finalX, finalY, 1000);
-costMatrix = [0,10;1,0];
+[XX,YY] = getSampleData(finalX, finalY, 400);
+costMatrix = [0,1;1,0];
 SVMModel = fitcsvm(XX,YY,'Standardize',true,'Cost',costMatrix);
 
 % create SVM ROC curve
@@ -107,7 +107,7 @@ title('ROC Curves for SVM')
 
 CVSVMModel = crossval(SVMModel);
 [yFit,sFit] = kfoldPredict(CVSVMModel);
-[cfMat, order] = confusionmat(YY,yFit)
+[cfMat, order] = confusionmat(YY,yFit);
 
 misclass1 = kfoldLoss(CVSVMModel);
 
@@ -120,15 +120,22 @@ precision = TP / (TP + FP);
 recall = TP / (TP + FN);
 accuracy = (TP + TN) / (TP + FP + TN + FN);
 F_score = 2 * ((precision * recall) / (precision + recall));
-disp(['SVM CVAL Accuracy: ', num2str(accuracy)]);
-disp(['SVM Precision: ', num2str(precision)]);
-disp(['SVM Recall: ', num2str(recall)]);
-disp(['SVM F1 Score: ', num2str(F_score)]);
+
+header_string = 'SVM Classifier Cross-Validation Results'; 
+header_string2 = ['Date and Time: ', datestr(datetime('now'))];
+header_string3 = ['Number of Training Instances: ', num2str(length(SVMModel.Y))];
+accuracy_string = ['SVM Prediction Accuracy: ', num2str(accuracy)];
+precision_string = ['SVM Precision: ', num2str(precision)];
+recall_string = ['SVM Recall: ', num2str(recall)];
+f_score_string = ['SVM F1 Score: ', num2str(F_score)];
+results = char(header_string, header_string2, header_string3, accuracy_string, precision_string, ...
+    recall_string, f_score_string);
+logResults(results, cfMat, costMatrix);
 
 % predict on all of EEG data
 [yFit,sFit] = predict(SVMModel, finalX);
 finalYY = strcmp(finalY,'possible seizure');
-[cfMat, order] = confusionmat(finalYY,yFit)
+[cfMat, order] = confusionmat(finalYY,yFit);
 
 TP = cfMat(1,1);
 FP = cfMat(1,2);

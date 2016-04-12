@@ -33,6 +33,7 @@ t = templateTree('MinLeafSize',5);
 % rusTree = fitensemble(finalX(istrain,:),finalY(istrain),'RUSBoost',1000,t,...
 %     'LearnRate',0.1,'nprint',100);
 finalYY = strcmp(finalY,'possible seizure');
+cost = [0 1; 1 0];
 rusTree = fitensemble(XX,YY,'RUSBoost',100,t,...
     'LearnRate',0.1,'nprint',100,'KFold',5,'Cost',[0 1; 1 0]);
 toc
@@ -109,6 +110,7 @@ recall_string = ['SVM Recall: ', num2str(recall)];
 f_score_string = ['SVM F1 Score: ', num2str(F_score)];
 results = char(header_string, header_string2, header_string3, accuracy_string, precision_string, ...
     recall_string, f_score_string)
+logResults(results, cfMat, cost);
 %{
 cmpctRus = compact(rusTree);
 

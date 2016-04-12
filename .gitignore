@@ -16,3 +16,4 @@ IEEGToolbox/SeniorDesign/lib/
 IEEGToolbox/.DS_Store
 .gitignore~
 *.mat
+*.png

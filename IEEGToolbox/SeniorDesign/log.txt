@@ -1,0 +1,14 @@
+
+SVM Classifier Prediction Results  
+Date and Time: 12-Apr-2016 14:31:55
+Number of Training Instances: 2000 
+SVM Prediction Accuracy: 0.9975    
+SVM Precision: 0.99841             
+SVM Recall: 0.99909                
+SVM Recall: 0.99909                
+Confusion Matrix
+29540,47
+27,26
+Cost Matrix
+0,10
+1,0

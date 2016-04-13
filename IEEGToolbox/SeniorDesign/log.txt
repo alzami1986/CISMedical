@@ -1,0 +1,84 @@
+
+SVM Classifier Prediction Results  
+Date and Time: 12-Apr-2016 14:31:55
+Number of Training Instances: 2000 
+SVM Prediction Accuracy: 0.9975    
+SVM Precision: 0.99841             
+SVM Recall: 0.99909                
+SVM F1 Score: 0.99909                
+Confusion Matrix
+29540,47
+27,26
+Cost Matrix
+0,10
+1,0
+
+RUSBoost Classifier Cross-Validation Results
+Date and Time: 12-Apr-2016 14:36:29         
+Number of Training Instances: 2000          
+SVM Prediction Accuracy: 0.9955             
+SVM Precision: 0.991                        
+SVM Recall: 1                               
+SVM F1 Score: 1                               
+Confusion Matrix
+991,9
+0,1000
+Cost Matrix
+0,1
+1,0
+
+SVM Classifier Prediction Results  
+Date and Time: 12-Apr-2016 14:40:55
+Number of Training Instances: 800  
+SVM Prediction Accuracy: 0.98084   
+SVM Precision: 0.9808              
+SVM Recall: 1                      
+SVM F1 Score: 1                      
+Confusion Matrix
+29019,568
+0,53
+Cost Matrix
+0,10
+1,0
+
+SVM Classifier Prediction Results  
+Date and Time: 12-Apr-2016 14:43:11
+Number of Training Instances: 800  
+SVM Prediction Accuracy: 0.99578   
+SVM Precision: 0.99615             
+SVM Recall: 0.99963                
+SVM F1 Score: 0.99788              
+Confusion Matrix
+29473,114
+11,42
+Cost Matrix
+0,1
+1,0
+
+SVM Classifier Cross-Validation Results
+Date and Time: 12-Apr-2016 14:44:52    
+Number of Training Instances: 800      
+SVM Prediction Accuracy: 0.8325        
+SVM Precision: 0.9975                  
+SVM Recall: 0.75                       
+SVM F1 Score: 0.85622                  
+Confusion Matrix
+399,1
+133,267
+Cost Matrix
+0,1
+1,0
+
+SVM Classifier Prediction Results  
+Date and Time: 12-Apr-2016 14:44:52
+Number of Training Instances: 800  
+SVM Prediction Accuracy: 0.99703   
+SVM Precision: 0.9975              
+SVM Recall: 0.99953                
+SVM F1 Score: 0.99851              
+Confusion Matrix
+29513,74
+14,39
+Cost Matrix
+0,1
+1,0

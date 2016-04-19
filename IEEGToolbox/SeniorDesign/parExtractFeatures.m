@@ -1,4 +1,4 @@
-function [finalX,finalY] = extractFeatures(dataset, start_time, duration)
+function [finalX,finalY] = parExtractFeatures(dataset, duration)
 
 numChannels = length(dataset.rawChannels);
 numMinutes = (duration/60);
@@ -9,8 +9,9 @@ numDataWindows = floor(seizure_length / duration);
 finalX = NaN(numDataWindows*numWindows, numChannels*2);
 finalY = cell(numDataWindows*numWindows,1);
 
-for t = 1:numDataWindows
+parfor t = 1:numDataWindows
     tic
+    start_time = (t-1)*600;
     disp([ 'Iteration: ', num2str(t) ]);
     disp([ 'Start_time: ', num2str(start_time) ]);
     try
@@ -33,7 +34,7 @@ for t = 1:numDataWindows
     
     
     A = data_clip;
-    [M, N] = size(data_clip);
+    [~, N] = size(data_clip);
     
     %     numMinutes = (duration/60)*(t+1);
     valsPerSec = length(A)/(numMinutes*60); %aka fs = sample rate
@@ -75,7 +76,7 @@ for t = 1:numDataWindows
     ann = dataset.annLayer(1).getEvents(1); % might need to use a different annLayer
     ann_start_times = {ann.start};
     ann_stop_times = {ann.stop};
-    [cell_rows, cell_cols] = size(ann_start_times);
+    [~, cell_cols] = size(ann_start_times);
     
     
     % Get corresponding labels for training instances

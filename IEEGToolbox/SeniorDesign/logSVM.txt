@@ -1,0 +1,465 @@
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:36:17
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 32245
+Number of Testing Instances: 7415  
+SVM Accuracy: 0.9555               
+SVM Precision: 0.99662             
+SVM Recall: 0.95856                
+SVM F1 Score: 0.97722              
+Confusion Matrix
+7078,306
+24,7
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:36:24
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 32248
+Number of Testing Instances: 7412  
+SVM Accuracy: 0.90151              
+SVM Precision: 0.99835             
+SVM Recall: 0.90263                
+SVM F1 Score: 0.94808              
+Confusion Matrix
+6665,719
+11,17
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:36:35
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 32252
+Number of Testing Instances: 7408  
+SVM Accuracy: 0.94141              
+SVM Precision: 0.99914             
+SVM Recall: 0.94204                
+SVM F1 Score: 0.96975              
+Confusion Matrix
+6956,428
+6,18
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:36:42
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 32255
+Number of Testing Instances: 7405  
+SVM Accuracy: 0.9503               
+SVM Precision: 0.99915             
+SVM Recall: 0.95098                
+SVM F1 Score: 0.97447              
+Confusion Matrix
+7022,362
+6,15
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:36:48
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 32259
+Number of Testing Instances: 7401  
+SVM Accuracy: 0.95298              
+SVM Precision: 0.99915             
+SVM Recall: 0.95368                
+SVM F1 Score: 0.97589              
+Confusion Matrix
+7042,342
+6,11
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:00
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 34034
+Number of Testing Instances: 5626  
+SVM Accuracy: 0.90206              
+SVM Precision: 0.9998              
+SVM Recall: 0.902                  
+SVM F1 Score: 0.94838              
+Confusion Matrix
+5062,550
+1,13
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:13
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 34038
+Number of Testing Instances: 5622  
+SVM Accuracy: 0.9027               
+SVM Precision: 0.9998              
+SVM Recall: 0.90271                
+SVM F1 Score: 0.94878              
+Confusion Matrix
+5066,546
+1,9
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:30
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 34041
+Number of Testing Instances: 5619  
+SVM Accuracy: 0.91297              
+SVM Precision: 0.9998              
+SVM Recall: 0.91304                
+SVM F1 Score: 0.95446              
+Confusion Matrix
+5124,488
+1,6
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:40
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 34045
+Number of Testing Instances: 5615  
+SVM Accuracy: 0.9106               
+SVM Precision: 0.9998              
+SVM Recall: 0.91073                
+SVM F1 Score: 0.95319              
+Confusion Matrix
+5111,501
+1,2
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:48
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 34048
+Number of Testing Instances: 5612  
+SVM Accuracy: 0.91091              
+SVM Precision: 1                   
+SVM Recall: 0.91091                
+SVM F1 Score: 0.95338              
+Confusion Matrix
+5112,500
+0,0
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:49
+Dataset ID: I001_P005_D01          
+Number of Training Instances: 2343 
+Number of Testing Instances: 9042  
+SVM Accuracy: 0.99912              
+SVM Precision: 0.99945             
+SVM Recall: 0.99967                
+SVM F1 Score: 0.99956              
+Confusion Matrix
+9033,3
+5,1
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:49
+Dataset ID: I001_P005_D01          
+Number of Training Instances: 2343 
+Number of Testing Instances: 9042  
+SVM Accuracy: 0.99912              
+SVM Precision: 0.99945             
+SVM Recall: 0.99967                
+SVM F1 Score: 0.99956              
+Confusion Matrix
+9033,3
+5,1
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:49
+Dataset ID: I001_P005_D01          
+Number of Training Instances: 2344 
+Number of Testing Instances: 9041  
+SVM Accuracy: 0.99856              
+SVM Precision: 0.99945             
+SVM Recall: 0.99911                
+SVM F1 Score: 0.99928              
+Confusion Matrix
+9028,8
+5,0
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:49
+Dataset ID: I001_P005_D01          
+Number of Training Instances: 2345 
+Number of Testing Instances: 9040  
+SVM Accuracy: 0.99923              
+SVM Precision: 0.99956             
+SVM Recall: 0.99967                
+SVM F1 Score: 0.99961              
+Confusion Matrix
+9033,3
+4,0
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:49
+Dataset ID: I001_P005_D01          
+Number of Training Instances: 2346 
+Number of Testing Instances: 9039  
+SVM Accuracy: 0.99934              
+SVM Precision: 0.99967             
+SVM Recall: 0.99967                
+SVM F1 Score: 0.99967              
+Confusion Matrix
+9033,3
+3,0
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:49
+Dataset ID: I001_P005_D01          
+Number of Training Instances: 2346 
+Number of Testing Instances: 9039  
+SVM Accuracy: 0.99934              
+SVM Precision: 0.99967             
+SVM Recall: 0.99967                
+SVM F1 Score: 0.99967              
+Confusion Matrix
+9033,3
+3,0
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:49
+Dataset ID: I001_P005_D01          
+Number of Training Instances: 2347 
+Number of Testing Instances: 9038  
+SVM Accuracy: 0.99945              
+SVM Precision: 0.99978             
+SVM Recall: 0.99967                
+SVM F1 Score: 0.99972              
+Confusion Matrix
+9033,3
+2,0
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:49
+Dataset ID: I001_P005_D01          
+Number of Training Instances: 2348 
+Number of Testing Instances: 9037  
+SVM Accuracy: 0.99989              
+SVM Precision: 0.99989             
+SVM Recall: 1                      
+SVM F1 Score: 0.99994              
+Confusion Matrix
+9036,0
+1,0
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:37:49
+Dataset ID: I001_P005_D01          
+Number of Training Instances: 2348 
+Number of Testing Instances: 9037  
+SVM Accuracy: 0.99989              
+SVM Precision: 0.99989             
+SVM Recall: 1                      
+SVM F1 Score: 0.99994              
+Confusion Matrix
+9036,0
+1,0
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:39:32
+Dataset ID: I001_P010_D01          
+Number of Training Instances: 428  
+Number of Testing Instances: 29212 
+SVM Accuracy: 0.92096              
+SVM Precision: 0.99892             
+SVM Recall: 0.92182                
+SVM F1 Score: 0.95882              
+Confusion Matrix
+26884,2280
+29,19
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:39:32
+Dataset ID: I001_P010_D01          
+Number of Training Instances: 596  
+Number of Testing Instances: 29044 
+SVM Accuracy: 0.96712              
+SVM Precision: 0.99925             
+SVM Recall: 0.9678                 
+SVM F1 Score: 0.98327              
+Confusion Matrix
+28068,934
+21,21
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:39:32
+Dataset ID: I001_P010_D01          
+Number of Training Instances: 754  
+Number of Testing Instances: 28886 
+SVM Accuracy: 0.59022              
+SVM Precision: 0.99965             
+SVM Recall: 0.5899                 
+SVM F1 Score: 0.74196              
+Confusion Matrix
+17018,11831
+6,31
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:39:33
+Dataset ID: I001_P010_D01          
+Number of Training Instances: 1367 
+Number of Testing Instances: 28273 
+SVM Accuracy: 0.67959              
+SVM Precision: 0.99969             
+SVM Recall: 0.67944                
+SVM F1 Score: 0.80902              
+Confusion Matrix
+19188,9053
+6,26
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:39:37
+Dataset ID: I001_P010_D01          
+Number of Training Instances: 14856
+Number of Testing Instances: 14784 
+SVM Accuracy: 0.99871              
+SVM Precision: 0.99871             
+SVM Recall: 1                      
+SVM F1 Score: 0.99936              
+Confusion Matrix
+14758,0
+19,7
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:39:39
+Dataset ID: I001_P010_D01          
+Number of Training Instances: 14861
+Number of Testing Instances: 14779 
+SVM Accuracy: 0.99905              
+SVM Precision: 0.99905             
+SVM Recall: 1                      
+SVM F1 Score: 0.99953              
+Confusion Matrix
+14758,0
+14,7
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:39:42
+Dataset ID: I001_P010_D01          
+Number of Training Instances: 15382
+Number of Testing Instances: 14258 
+SVM Accuracy: 0.99951              
+SVM Precision: 0.99951             
+SVM Recall: 1                      
+SVM F1 Score: 0.99975              
+Confusion Matrix
+14242,0
+7,9
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:39:46
+Dataset ID: I001_P010_D01          
+Number of Training Instances: 17334
+Number of Testing Instances: 12306 
+SVM Accuracy: 0.99967              
+SVM Precision: 0.99967             
+SVM Recall: 1                      
+SVM F1 Score: 0.99984              
+Confusion Matrix
+12295,0
+4,7
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:39:50
+Dataset ID: I001_P010_D01          
+Number of Training Instances: 20578
+Number of Testing Instances: 9062  
+SVM Accuracy: 0.99967              
+SVM Precision: 0.99978             
+SVM Recall: 0.99989                
+SVM F1 Score: 0.99983              
+Confusion Matrix
+9056,1
+2,3
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 17-Apr-2016 15:39:53
+Dataset ID: I001_P010_D01          
+Number of Training Instances: 20583
+Number of Testing Instances: 9057  
+SVM Accuracy: 0.99989              
+SVM Precision: 1                   
+SVM Recall: 0.99989                
+SVM F1 Score: 0.99994              
+Confusion Matrix
+9056,1
+0,0
+Cost Matrix
+0,1
+10,0
+

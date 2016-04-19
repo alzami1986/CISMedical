@@ -1,116 +1,106 @@
 %% Bagged Decision Trees Classifier
-% get data 
 
-% start_time = 353251.55;
+crossvalidation_on = false;
 
-% session_names = char('I001_P002_D01', 'I001_P005_D01', 'I001_P010_D01');
-% r = randi([1 3],1,1); % generate random number between 1 and 3
-% session_name = session_names(r,:);
-
-% start_time = 3.356174348000000e+11 / 1e6;
-start_time = 0;
-% end_time = 353689.00;
-% session = IEEGSession('I001_P010_D01', 'indaso', 'ind_ieeglogin');
-% dataset = session.data;
-% duration = 600; 1st patient dataset
-duration = 150; % 2nd patient dataset
+load finalXFullSignal3
+load finalYFullSignal3
 
 tic
 % [finalX, finalY] = extractFeatures(dataset, start_time, duration);
-[XX,YY] = getSampleData(finalX, finalY, 1000);
-toc
+[XX,YY] = getSampleData(finalX, finalY, 10);
+finalYY = logical(strcmp(finalY, 'possible seizure'));
 
-% load finalXFullSignal3
-% load finalYFullSignal3
-
-% part = cvpartition(finalY,'holdout',0.5);
-% istrain = training(part); % data for fitting
-% istest = test(part); % data for quality assessment
+if(not(crossvalidation_on))
+    part = cvpartition(YY,'holdout',0.5);
+    istrain = training(part); % data for fitting
+    istest = test(part); % data for quality assessment
+end
 
 tic
 t = templateTree('MinLeafSize',5);
-% cost = [0 10; 1 0];
-% rusTree = fitensemble(finalX(istrain,:),finalY(istrain),'RUSBoost',1000,t,...
-%     'LearnRate',0.1,'nprint',100);
-finalYY = strcmp(finalY,'possible seizure');
-cost = [0 1; 1 0];
-rusTree = fitensemble(XX,YY,'RUSBoost',100,t,...
-    'LearnRate',0.1,'nprint',100,'KFold',5,'Cost',[0 1; 1 0]);
+cost = [0 1; 10 0];
+if(not(crossvalidation_on))
+%     rusTree = fitensemble(XX(istrain,:),YY(istrain),'RUSBoost',1000,t,...
+%     'LearnRate',0.1,'nprint',100,'Cost',cost);
+    rusTree = fitensemble(XX,YY,'RUSBoost',1000,t,...
+    'LearnRate',0.1,'nprint',100,'Cost',cost);
+else
+    cv = cvpartition(YY,'KFold',10);
+    rusTree = fitensemble(XX,YY,'RUSBoost',1000,t,...
+    'LearnRate',0.1,'nprint',100,'CVPartition',cv,'Cost',cost);
+end
 toc
 
+%{
 figure;
+if(not(crossvalidation_on))
+%     plot(loss(rusTree,XX(istest,:),YY(istest),'mode','cumulative'));
+    plot(loss(rusTree,XX,YY,'mode','cumulative'));
+else
+    plot(kfoldLoss(rusTree,'Mode','cumulative'));
+end
 
-% plot(loss(rusTree,finalX(istest,:),finalY(istest),'mode','cumulative'));
-plot(kfoldLoss(rusTree,'Mode','cumulative'));
-toc
 grid on;
 xlabel('Number of trees');
 ylabel('Test classification error');
+%}
 
-[yFit,sFit] = kfoldPredict(rusTree);
-[XTree,YTree,TTree,AUCTree] = perfcurve(YY,sFit(:,rusTree.ClassNames),1, 'xCrit', 'reca', 'yCrit', 'prec');
-[cfMat, order] = confusionmat(YY,yFit)
+if(not(crossvalidation_on))
+%     [yFit, sFit] = predict(rusTree, XX(istest,:));
+    [yFit, sFit] = predict(rusTree, finalX);
+%     [XTree,YTree,TTree,AUCTree] = perfcurve(YY(istest),sFit(:,rusTree.ClassNames),1, 'xCrit', 'reca', 'yCrit', 'prec');
+%     [XTree,YTree,TTree,AUCTree] = perfcurve(finalYY,sFit(:,rusTree.ClassNames),1, 'xCrit', 'reca', 'yCrit', 'prec');
+else
+    [yFit,sFit] = kfoldPredict(rusTree);
+%     [XTree,YTree,TTree,AUCTree] = perfcurve(YY,sFit(:,rusTree.ClassNames),1, 'xCrit', 'reca', 'yCrit', 'prec');
+end
 
+if(crossvalidation_on)
+    [cfMat, order] = confusionmat(YY,yFit);
+else
+%     [cfMat, order] = confusionmat(YY(istest),yFit);
+    [cfMat, order] = confusionmat(finalYY,yFit);
+end
+%{
 figure
 plot(XTree,YTree)
 xlabel('Recall'); ylabel('Precision')
 title(['Precision-recall curve (AUC: ' num2str(AUCTree) ')'])
-
-
-%{
-tic
-Yfit = predict(rusTree,finalX(istest,:));
-toc
-tab = tabulate(finalY(istest));
-[cfMat,order] = confusionmat(finalY(istest),Yfit),tab(:,2)
-%}
-%{
-finalYYY = [];
-finalYfit = [];
-LL = finalY(istest);
-NN = length(LL);
-
-parfor i = 1:NN
-    if(strcmp(LL(i),'non-seizure'))
-        finalYYY = [finalYYY; 1];
-    else
-        finalYYY = [finalYYY; 0];
-    end
-end
-parfor i = 1:NN
-    if(strcmp(Yfit(i),'non-seizure'))
-        finalYfit = [finalYfit; 1];
-    else
-        finalYfit = [finalYfit; 0];
-    end
-end
-plotconfusion(finalYYY,finalYfit);
 %}
 TP = cfMat(1,1);
-FP = cfMat(1,2);
+FP = cfMat(2,1);
 TN = cfMat(2,2);
-FN = cfMat(2,1);
+FN = cfMat(1,2);
 
 precision = TP / (TP + FP);
 recall = TP / (TP + FN);
 F_score = 2 * ((precision * recall) / (precision + recall));
 accuracy = (TP + TN) / (TP + FP + TN + FN);
 
-disp(['rusboost CVAL Accuracy: ', num2str(accuracy)]);
-disp(['rusboost Precision: ', num2str(precision)]);
-disp(['rusboost Recall: ', num2str(recall)]);
-disp(['rusboost F1 Score: ', num2str(F_score)]);
-
-header_string = 'RUSBoost Classifier Cross-Validation Results'; 
+if(not(crossvalidation_on))
+    header_string = 'RUSBoost Classifier Prediction Results'; 
+else
+    header_string = 'RUSBoost Classifier Cross-Validation Results'; 
+end
 header_string2 = ['Date and Time: ', datestr(datetime('now'))];
-header_string3 = ['Number of Training Instances: ', num2str(length(SVMModel.Y))];
-accuracy_string = ['SVM Prediction Accuracy: ', num2str(accuracy)];
-precision_string = ['SVM Precision: ', num2str(precision)];
-recall_string = ['SVM Recall: ', num2str(recall)];
-f_score_string = ['SVM F1 Score: ', num2str(F_score)];
+header_string3 = ['Number of Training Instances: ', num2str(length(rusTree.Y))];
+header_string4 = ['Number of Testing Instances: ', num2str(length(yFit))];
+accuracy_string = ['RUSBoost Accuracy: ', num2str(accuracy)];
+precision_string = ['RUSBoost Precision: ', num2str(precision)];
+recall_string = ['RUSBoost Recall: ', num2str(recall)];
+f_score_string = ['RUSBoost F1 Score: ', num2str(F_score)];
+if(length(finalY) == 39660)
+    dataset_string = 'Dataset ID: I001_P002_D01';
+elseif(length(finalY) == 11385)
+    dataset_string = 'Dataset ID: I001_P005_D01';
+else
+    dataset_string = 'Dataset ID: I001_P010_D01';
+end
 results = char(header_string, header_string2, header_string3, accuracy_string, precision_string, ...
-    recall_string, f_score_string)
+    recall_string, f_score_string,dataset_string,header_string4);
 logResults(results, cfMat, cost);
+
+%% Reduce Size of Tree
 %{
 cmpctRus = compact(rusTree);
 

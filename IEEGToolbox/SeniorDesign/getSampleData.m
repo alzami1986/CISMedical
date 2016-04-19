@@ -1,19 +1,18 @@
-function [X, Y] = getSampleData(finalX, finalY, NumSamples) 
-if (NumSamples == 0) 
+function [XTrain, YTrain, XTest, YTest] = getSampleData(finalX, finalY, SeizurePercentage) 
+if (SeizurePercentage == 0) 
     X = finalX;
-    Y = finalY;
+    Y = logical(strcmp(finalY, 'possible seizure'));
     return;
 end
 finalYY = strcmp(finalY, 'possible seizure');
 finalYY = logical(finalYY);
-non_seizure_indices = not(finalYY);
-seizure_indices = finalYY;
-seizure_region_data = datasample(finalX(seizure_indices,:),NumSamples);
-non_seizure_region_data = datasample(finalX(non_seizure_indices,:),NumSamples);
-Y = [];
-Y(1:NumSamples) = 1;
-Y(NumSamples + 1:(NumSamples*2)) = 0;
-Y = Y';
-Y = logical(Y);
-X = [seizure_region_data;non_seizure_region_data];
+totalNumSeizures = nnz(finalYY);
+nSeizuresToKeep = round(totalNumSeizures*(SeizurePercentage/100));
+seizure_indices = find(finalYY,nSeizuresToKeep);
+len = length(seizure_indices);
+index = seizure_indices(len);
+XTrain = finalX(1:index,:);
+YTrain = finalYY(1:index);
+XTest = finalX(index + 1:end,:);
+YTest = finalYY(index + 1:end);
 end

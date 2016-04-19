@@ -1,84 +1,240 @@
 
-SVM Classifier Prediction Results  
-Date and Time: 12-Apr-2016 14:31:55
-Number of Training Instances: 2000 
-SVM Prediction Accuracy: 0.9975    
-SVM Precision: 0.99841             
-SVM Recall: 0.99909                
-SVM F1 Score: 0.99909                
+SVM Classifier Cross-Validation Results
+Date and Time: 13-Apr-2016 22:45:22    
+Dataset ID: I001_P002_D01              
+Number of Training Instances: 39660    
+Number of Testing Instances: 39660     
+SVM Accuracy: 0.99965                  
+SVM Precision: 0.9999                  
+SVM Recall: 0.99975                    
+SVM F1 Score: 0.99982                  
 Confusion Matrix
-29540,47
-27,26
-Cost Matrix
-0,10
-1,0
-
-RUSBoost Classifier Cross-Validation Results
-Date and Time: 12-Apr-2016 14:36:29         
-Number of Training Instances: 2000          
-SVM Prediction Accuracy: 0.9955             
-SVM Precision: 0.991                        
-SVM Recall: 1                               
-SVM F1 Score: 1                               
-Confusion Matrix
-991,9
-0,1000
+39615,10
+4,31
 Cost Matrix
 0,1
-1,0
-
-SVM Classifier Prediction Results  
-Date and Time: 12-Apr-2016 14:40:55
-Number of Training Instances: 800  
-SVM Prediction Accuracy: 0.98084   
-SVM Precision: 0.9808              
-SVM Recall: 1                      
-SVM F1 Score: 1                      
-Confusion Matrix
-29019,568
-0,53
-Cost Matrix
-0,10
-1,0
-
-SVM Classifier Prediction Results  
-Date and Time: 12-Apr-2016 14:43:11
-Number of Training Instances: 800  
-SVM Prediction Accuracy: 0.99578   
-SVM Precision: 0.99615             
-SVM Recall: 0.99963                
-SVM F1 Score: 0.99788              
-Confusion Matrix
-29473,114
-11,42
-Cost Matrix
-0,1
-1,0
+10,0
 
 SVM Classifier Cross-Validation Results
-Date and Time: 12-Apr-2016 14:44:52    
-Number of Training Instances: 800      
-SVM Prediction Accuracy: 0.8325        
-SVM Precision: 0.9975                  
-SVM Recall: 0.75                       
-SVM F1 Score: 0.85622                  
+Date and Time: 13-Apr-2016 22:47:34    
+Dataset ID: I001_P005_D01              
+Number of Training Instances: 11385    
+Number of Testing Instances: 11385     
+SVM Accuracy: 0.99991                  
+SVM Precision: 0.99991                 
+SVM Recall: 1                          
+SVM F1 Score: 0.99996                  
 Confusion Matrix
-399,1
-133,267
+11378,0
+1,6
 Cost Matrix
 0,1
-1,0
+10,0
 
-SVM Classifier Prediction Results  
-Date and Time: 12-Apr-2016 14:44:52
-Number of Training Instances: 800  
-SVM Prediction Accuracy: 0.99703   
-SVM Precision: 0.9975              
-SVM Recall: 0.99953                
-SVM F1 Score: 0.99851              
+SVM Classifier Cross-Validation Results
+Date and Time: 13-Apr-2016 22:48:59    
+Dataset ID: I001_P010_D01              
+Number of Training Instances: 29640    
+Number of Testing Instances: 29640     
+SVM Accuracy: 0.99855                  
+SVM Precision: 0.99902                 
+SVM Recall: 0.99953                    
+SVM F1 Score: 0.99927                  
 Confusion Matrix
-29513,74
+29573,14
+29,24
+Cost Matrix
+0,1
+10,0
+
+RUSBoost Classifier Cross-Validation Results
+Date and Time: 13-Apr-2016 23:34:12         
+Dataset ID: I001_P002_D01                   
+Number of Training Instances: 39660         
+Number of Testing Instances: 39660          
+RUSBoost Accuracy: 0.99972                  
+RUSBoost Precision: 0.9999                  
+RUSBoost Recall: 0.99982                    
+RUSBoost F1 Score: 0.99986                  
+Confusion Matrix
+39618,7
+4,31
+Cost Matrix
+0,1
+10,0
+
+RUSBoost Classifier Cross-Validation Results
+Date and Time: 13-Apr-2016 23:43:16         
+Dataset ID: I001_P005_D01                   
+Number of Training Instances: 11385         
+Number of Testing Instances: 11385          
+RUSBoost Accuracy: 0.99974                  
+RUSBoost Precision: 0.99991                 
+RUSBoost Recall: 0.99982                    
+RUSBoost F1 Score: 0.99987                  
+Confusion Matrix
+11376,2
+1,6
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Cross-Validation Results
+Date and Time: 14-Apr-2016 00:01:07    
+Dataset ID: I001_P002_D01              
+Number of Training Instances: 39660    
+Number of Testing Instances: 39660     
+SVM Accuracy: 0.98568                  
+SVM Precision: 0.99977                 
+SVM Recall: 0.98589                    
+SVM F1 Score: 0.99278                  
+Confusion Matrix
+39066,559
+9,26
+Cost Matrix
+0,1
+1000,0
+
+RUSBoost Classifier Cross-Validation Results
+Date and Time: 14-Apr-2016 00:37:41         
+Dataset ID: I001_P010_D01                   
+Number of Training Instances: 29640         
+Number of Testing Instances: 29640          
+RUSBoost Accuracy: 0.99889                  
+RUSBoost Precision: 0.99953                 
+RUSBoost Recall: 0.99936                    
+RUSBoost F1 Score: 0.99944                  
+Confusion Matrix
+29568,19
 14,39
 Cost Matrix
 0,1
-1,0
+10,0
+
+SVM Classifier Cross-Validation Results
+Date and Time: 14-Apr-2016 13:00:59    
+Dataset ID: I001_P002_D01              
+Number of Training Instances: 4000     
+Number of Testing Instances: 4000      
+SVM Accuracy: 0.82925                  
+SVM Precision: 1                       
+SVM Recall: 0.6585                     
+SVM F1 Score: 0.79409                  
+Confusion Matrix
+1317,683
+0,2000
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 14-Apr-2016 13:01:00
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 4000 
+Number of Testing Instances: 39660 
+SVM Accuracy: 0.67123              
+SVM Precision: 1                   
+SVM Recall: 0.67094                
+SVM F1 Score: 0.80307              
+Confusion Matrix
+26586,13039
+0,35
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Cross-Validation Results
+Date and Time: 14-Apr-2016 13:01:20    
+Dataset ID: I001_P002_D01              
+Number of Training Instances: 8000     
+Number of Testing Instances: 8000      
+SVM Accuracy: 0.85325                  
+SVM Precision: 1                       
+SVM Recall: 0.7065                     
+SVM F1 Score: 0.82801                  
+Confusion Matrix
+2826,1174
+0,4000
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 14-Apr-2016 13:01:22
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 8000 
+Number of Testing Instances: 39660 
+SVM Accuracy: 0.71561              
+SVM Precision: 1                   
+SVM Recall: 0.71536                
+SVM F1 Score: 0.83406              
+Confusion Matrix
+28346,11279
+0,35
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Cross-Validation Results
+Date and Time: 14-Apr-2016 13:02:11    
+Dataset ID: I001_P002_D01              
+Number of Training Instances: 16000    
+Number of Testing Instances: 16000     
+SVM Accuracy: 0.91619                  
+SVM Precision: 1                       
+SVM Recall: 0.83237                    
+SVM F1 Score: 0.90852                  
+Confusion Matrix
+6659,1341
+0,8000
+Cost Matrix
+0,1
+10,0
+
+SVM Classifier Prediction Results  
+Date and Time: 14-Apr-2016 13:02:17
+Dataset ID: I001_P002_D01          
+Number of Training Instances: 16000
+Number of Testing Instances: 39660 
+SVM Accuracy: 0.84397              
+SVM Precision: 1                   
+SVM Recall: 0.84384                
+SVM F1 Score: 0.9153               
+Confusion Matrix
+33437,6188
+0,35
+Cost Matrix
+0,1
+10,0
+
+RUSBoost Classifier Prediction Results
+Date and Time: 14-Apr-2016 13:06:41   
+Dataset ID: I001_P010_D01             
+Number of Training Instances: 4000    
+Number of Testing Instances: 29640    
+RUSBoost Accuracy: 0.99389            
+RUSBoost Precision: 1                 
+RUSBoost Recall: 0.99388              
+RUSBoost F1 Score: 0.99693            
+Confusion Matrix
+29406,181
+0,53
+Cost Matrix
+0,1
+10,0
+
+RUSBoost Classifier Prediction Results
+Date and Time: 14-Apr-2016 13:39:13   
+Dataset ID: I001_P010_D01             
+Number of Training Instances: 8000    
+Number of Testing Instances: 29640    
+RUSBoost Accuracy: 0.99706            
+RUSBoost Precision: 1                 
+RUSBoost Recall: 0.99706              
+RUSBoost F1 Score: 0.99853            
+Confusion Matrix
+29500,87
+0,53
+Cost Matrix
+0,1
+10,0

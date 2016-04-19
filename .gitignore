@@ -17,3 +17,4 @@ IEEGToolbox/.DS_Store
 .gitignore~
 *.mat
 *.png
+*.csv

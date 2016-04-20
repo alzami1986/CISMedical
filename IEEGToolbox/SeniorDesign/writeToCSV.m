@@ -1,4 +1,4 @@
-function writeToCSV(allData)
+function writeToCSV(allData,j,filename)
 allData = allData(:,1);
 % allData(not(allData)) = NaN;
 tic
@@ -13,7 +13,6 @@ headers = cellstr(headers);
 headers = headers';
 
 Xtime = zeros(m,1);
-j = 0;
 for i = 1:m
     j = j + 10;
     Xtime(i) = j;
@@ -63,7 +62,7 @@ end
 str = [s{:}];
 
 % write data all at once to file
-fid = fopen('patient1_100.csv','w');
+fid = fopen(filename,'w');
 fwrite(fid, str);
 fclose(fid);
 

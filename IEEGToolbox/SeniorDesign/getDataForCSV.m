@@ -9,9 +9,11 @@ numWindows = duration/10;
 numRows = duration*100;
 downSampleRate = 50;
 reSampleRate = 100;
+csvTime = 0;
 seizure_length = dataset.rawChannels(1).get_tsdetails.getDuration / 1e6;
 numDataWindows = floor(seizure_length / duration);
-allData = NaN((numDataWindows*duration*reSampleRate)/4, numChannels);
+allData = NaN(1200000, numChannels);
+ind = 1;
 
 for t = 1:numDataWindows
     tic
@@ -35,7 +37,6 @@ for t = 1:numDataWindows
         end
     end
     
-    start_time = start_time + duration;
     % only for 05 patient
     %     data_clip(:,[5, 8]) = [];
     A = data_clip;
@@ -49,29 +50,27 @@ for t = 1:numDataWindows
     
     numRows = reSampleRate*duration;
     downSampledData = downsample(A, downSampleRate);
-    index = (t-1)*numRows + 1;
+%     index = (t-1)*numRows + 1;
+    index = ind;
     allData(index:index + (numRows - 1),:) = downSampledData;
-    
-    if(t == 193)
-        patient_num = 1;
-        filename = ['patient1_hundredrate' num2str(patient_num) '.mat'];
-        save(filename,'allData','-v7.3')
-        allData = NaN((numDataWindows*duration*reSampleRate)/4, numChannels);
-    elseif(t == 386)
-        patient_num = 2;
-        filename = ['patient1_hundredrate' num2str(patient_num) '.mat'];
-        save(filename,'allData','-v7.3')
-        allData = NaN((numDataWindows*duration*reSampleRate)/4, numChannels);
-    elseif(t == 579)
-        patient_num = 3;
-        filename = ['patient1_hundredrate' num2str(patient_num) '.mat'];
-        save(filename,'allData','-v7.3')
-        allData = NaN((numDataWindows*duration*reSampleRate)/4, numChannels);
-    elseif(t == numDataWindows)
-        patient_num = 4;
-        filename = ['patient1_hundredrate' num2str(patient_num) '.mat'];
-        save(filename,'allData','-v7.3')
+    if(t==numDataWindows)
+        allData(index+60000:end,:) = NaN;
+        filename = ['./data/patient1/patient1_' num2str(start_time) '.csv'];
+        writeToCSV(allData, csvTime, filename);
+        break;
     end
+    if(ind == 1140001)
+        if(exist('data/patient1','dir') ~= 7)            
+            mkdir('data/patient1')
+        end
+        filename = ['./data/patient1/patient1_' num2str(start_time) '.csv'];
+        writeToCSV(allData, csvTime, filename);
+        csvTime = csvTime + 1200000*10;
+        ind = 1;
+    end
+    ind = ind + 60000;
+    start_time = start_time + duration;
+
     toc
 end
 

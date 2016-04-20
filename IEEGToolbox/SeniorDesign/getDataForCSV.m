@@ -9,9 +9,6 @@ numWindows = duration/10;
 numRows = duration*100;
 downSampleRate = 50;
 reSampleRate = 100;
-dec_data = zeros(500,numChannels);
-dec_data2 = zeros(50,numChannels);
-A = zeros(5,numChannels);
 tic
 seizure_length = dataset.rawChannels(1).get_tsdetails.getDuration / 1e6;
 numDataWindows = floor(seizure_length / duration); 
@@ -56,20 +53,9 @@ for i = 1:4;
         A = low_pass_filter(A, sampleRate);
         
         numRows = reSampleRate*duration;
-        %     loop = duration*5000;
         ans2 = downsample(A, downSampleRate);
         index = (t-1)*numRows + 1;
         allData(index:index + (numRows - 1),:) = ans2;
-        % decimate each set of 5000 rows ( 450 times )
-        %     for k = 1:5000:loop
-        %         for j = 1:dn % decimate each channel
-        %             dec_data(:,j) = decimate(data_clip(k:(k+4999),j),10);
-        %             dec_data2(:,j) = decimate(dec_data(:,j),10);
-        %             A(:,j) = decimate(dec_data2(:,j),10);
-        %         end
-        %         index = (t-1)*numRows + 1 + (floor(k/5000)*5);
-        %         allData(index:index + 4,:) = A;
-        %     end
         toc
         
     end

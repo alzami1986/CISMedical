@@ -55,7 +55,7 @@ for t = 1:numDataWindows
     allData(index:index + (numRows - 1),:) = downSampledData;
     if(t==numDataWindows)
         allData(index+60000:end,:) = NaN;
-        filename = ['./data/patient1/patient1_' num2str(start_time) '.csv'];
+        filename = ['./data/patient1/patient1_' num2str(csvTime) '.csv'];
         writeToCSV(allData, csvTime, filename);
         break;
     end
@@ -63,7 +63,7 @@ for t = 1:numDataWindows
         if(exist('data/patient1','dir') ~= 7)            
             mkdir('data/patient1')
         end
-        filename = ['./data/patient1/patient1_' num2str(start_time) '.csv'];
+        filename = ['./data/patient1/patient1_' num2str(csvTime) '.csv'];
         writeToCSV(allData, csvTime, filename);
         csvTime = csvTime + 1200000*10;
         ind = 1;

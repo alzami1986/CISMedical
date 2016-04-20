@@ -10,6 +10,7 @@ numRows = duration*100;
 downSampleRate = 50;
 reSampleRate = 100;
 seizure_length = dataset.rawChannels(1).get_tsdetails.getDuration / 1e6;
+numDataWindows = floor(seizure_length / duration);
 allData = NaN((numDataWindows*duration*reSampleRate)/4, numChannels);
 
 for t = 1:numDataWindows

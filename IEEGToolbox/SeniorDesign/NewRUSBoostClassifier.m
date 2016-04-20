@@ -1,6 +1,6 @@
 %% RUSBoost Trees Classifier
 
-[XTrain,YTrain,XTest,YTest] = getSampleData(finalX, finalY, percent);
+[XTrain,YTrain,XTest,YTest] = getSampleData(finalX, finalY, 40);
 finalYY = logical(strcmp(finalY, 'possible seizure'));
 
 tic
@@ -21,6 +21,7 @@ ylabel('Test classification error');
 
 
 [yFit, sFit] = predict(rusTree, XTest);
+save('YPred2', 'yFit');
 %     [XTree,YTree,TTree,AUCTree] = perfcurve(YY(istest),sFit(:,rusTree.ClassNames),1, 'xCrit', 'reca', 'yCrit', 'prec');
 %     [XTree,YTree,TTree,AUCTree] = perfcurve(finalYY,sFit(:,rusTree.ClassNames),1, 'xCrit', 'reca', 'yCrit', 'prec');
 

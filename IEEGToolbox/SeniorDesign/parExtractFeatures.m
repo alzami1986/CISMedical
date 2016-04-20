@@ -25,7 +25,6 @@ parfor t = 1:numDataWindows
                 data_clip = dataset.getvalues(start_time*1e6,duration*1e6, ':');
             catch
                 disp([ 'Error with segment. Skipping ', 'start_time: ', num2str(start_time) ]);
-                start_time = start_time + duration;
                 continue;
             end
             
@@ -96,9 +95,11 @@ parfor t = 1:numDataWindows
         Y(j) = cellstr(region);
     end
     index = (t-1)*numRowsPerIter + 1;
+    for k = 1:60
+        finalX(1, :) = X(k,:);
+    end
     finalX(index:index + (numRowsPerIter - 1), :) = X;
     finalY(index:index + (numRowsPerIter - 1)) = Y;
-    start_time = start_time + duration;
 %     save('finalXFullSignal33.mat','finalX')
 %     save('finalYFullSignal33.mat','finalY')
     toc

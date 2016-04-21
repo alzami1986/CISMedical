@@ -1,4 +1,5 @@
-start_time = 0;
+% start_time = 0;
+start_time = 334200;
 duration = 600; % in seconds
 session = IEEGSession('I001_P002_D01', 'indaso', 'ind_ieeglogin');
 dataset = session.data;
@@ -11,11 +12,12 @@ downSampleRate = 50;
 reSampleRate = 100;
 csvTime = 0;
 seizure_length = dataset.rawChannels(1).get_tsdetails.getDuration / 1e6;
-numDataWindows = floor(seizure_length / duration);
+% numDataWindows = floor(seizure_length / duration);
+numDataWindows = 558+35;
 allData = NaN(1200000, numChannels);
 ind = 1;
 
-for t = 1:numDataWindows
+for t = 558:numDataWindows
     tic
     disp([ 'Iteration: ', num2str(t) ]);
     disp([ 'Start_time: ', num2str(start_time) ]);
@@ -55,16 +57,20 @@ for t = 1:numDataWindows
     allData(index:index + (numRows - 1),:) = downSampledData;
     if(t==numDataWindows)
         allData(index+60000:end,:) = NaN;
-        filename = ['./data/patient1/patient1_' num2str(csvTime) '.csv'];
-        writeToCSV(allData, csvTime, filename);
+        filename = ['./data/patient1/patient1_' num2str(csvTime) '.mat'];
+        csvfile = ['./data/patient1/patient1_' num2str(csvTime) '.csv'];
+        save(filename, 'allData','csvTime','csvfile');
+%         writeToCSV(allData, csvTime, filename);
         break;
     end
     if(ind == 1140001)
         if(exist('data/patient1','dir') ~= 7)            
             mkdir('data/patient1')
         end
-        filename = ['./data/patient1/patient1_' num2str(csvTime) '.csv'];
-        writeToCSV(allData, csvTime, filename);
+        filename = ['./data/patient1/patient1_' num2str(csvTime) '.mat'];
+        csvfile = ['./data/patient1/patient1_' num2str(csvTime) '.csv'];
+        save(filename, 'allData','csvTime','csvfile');
+%         writeToCSV(allData, csvTime, filename);
         csvTime = csvTime + 1200000*10;
         ind = 1;
     end

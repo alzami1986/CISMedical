@@ -5,8 +5,8 @@ for i=1:len
     filenames = [filenames; listings(i).name];
 end
 
-numFiles = len(filenames);
+[numFiles, ~] = size(filenames);
 for k=1:numFiles
-    load(filenames(i));
+    load(['data/patient1/' filenames(i,:)]);
     writeToCSV(allData,csvTime,csvfile);
 end

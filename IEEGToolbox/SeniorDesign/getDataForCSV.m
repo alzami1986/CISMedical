@@ -9,17 +9,20 @@ downData = NaN(100,15);
 numChannels = length(dataset.rawChannels);
 numMinutes = (duration/60);
 numWindows = duration/10;
-numRows = duration*100;
-downSampleRate = 50;
-reSampleRate = 100;
-csvTime = 558*60000*10;
+downSampleRate = 5;
+reSampleRate = 1000;
+numRows = duration*reSampleRate;
+
+% csvTime = 558*60000*10;
+csvTime = 560*1000000;
 seizure_length = dataset.rawChannels(1).get_tsdetails.getDuration / 1e6;
 % numDataWindows = floor(seizure_length / duration);
 numDataWindows = 558+35;
-allData = NaN(1200000, numChannels);
+maxDataRows = 1200000;
+allData = NaN(maxDataRows, numChannels);
 ind = 1;
 
-for t = 558:numDataWindows
+for t = 560:numDataWindows
     tic
     disp([ 'Iteration: ', num2str(t) ]);
     disp([ 'Start_time: ', num2str(start_time) ]);
@@ -52,7 +55,7 @@ for t = 558:numDataWindows
     %     A = high_pass_filter(A, sampleRate);
     %     A = low_pass_filter(A, sampleRate);
     % decimate each set of 5000 rows ( 450 times )
-    numRows = reSampleRate*duration;
+%     numRows = reSampleRate*duration;
 %     loop = duration*sampleRate;
 %     for k = 1:5000:loop
 %         for j = 1:dn % decimate each channel
@@ -62,12 +65,16 @@ for t = 558:numDataWindows
 %         index = ind + floor((k/5000))*100;
 %         allData(index:index + 99,:) = downData;
 %     end
-    
-        numRows = reSampleRate*duration;
+
+    % regular code
+%         numRows = reSampleRate*duration;
         downSampledData = downsample(A, downSampleRate);
 %         index = (t-1)*numRows + 1;
         index = ind;
         allData(index:index + (numRows - 1),:) = downSampledData;
+%     numRows = reSampleRate*duration;
+%     allData(index:index + (numRows - 1),:) = A;
+    
     if(t==numDataWindows)
         allData = allData(1:index + (numRows - 1),:);
         %         allData(index+60000:end,:) = NaN;
@@ -77,7 +84,7 @@ for t = 558:numDataWindows
         %         writeToCSV(allData, csvTime, filename);
         break;
     end
-    if(ind == 1140001)
+    if(ind == 600001) % 1140001
         if(exist('data/patient1','dir') ~= 7)
             mkdir('data/patient1')
         end
@@ -85,10 +92,10 @@ for t = 558:numDataWindows
         csvfile = ['./data/patient1/patient1_' num2str(csvTime) '.csv'];
         save(filename, 'allData','csvTime','csvfile');
         %         writeToCSV(allData, csvTime, filename);
-        csvTime = csvTime + 1200000*10;
+        csvTime = csvTime + maxDataRows; %*10
         ind = 1;
     end
-    ind = ind + 60000;
+    ind = ind + numRows;
     start_time = start_time + duration;
     
     toc

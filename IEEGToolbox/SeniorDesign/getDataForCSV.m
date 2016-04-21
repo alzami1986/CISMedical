@@ -47,7 +47,7 @@ for t = 558:numDataWindows
     
     
     % run data through filters
-    A = high_pass_filter(A, sampleRate);
+%     A = high_pass_filter(A, sampleRate);
     A = low_pass_filter(A, sampleRate);
     
     numRows = reSampleRate*duration;

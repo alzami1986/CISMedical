@@ -14,10 +14,10 @@ reSampleRate = 1000;
 numRows = duration*reSampleRate;
 
 % csvTime = 558*60000*10;
-csvTime = 560*1000000;
+csvTime = 560*600000; % begin of seizure with ms timestamp
 seizure_length = dataset.rawChannels(1).get_tsdetails.getDuration / 1e6;
 % numDataWindows = floor(seizure_length / duration);
-numDataWindows = 558+35;
+numDataWindows = 560+32;
 maxDataRows = 1200000;
 allData = NaN(maxDataRows, numChannels);
 ind = 1;

@@ -7,6 +7,8 @@ end
 
 [numFiles, ~] = size(filenames);
 for k=1:numFiles
+    tic
     load(['data/patient1/' filenames(i,:)]);
     writeToCSV(allData,csvTime,csvfile);
+    toc
 end

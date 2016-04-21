@@ -1,7 +1,6 @@
-function writeToCSV(allData,j,filename)
+function writeToCSV(allData,timestamp,filename)
 allData = allData(:,1);
 % allData(not(allData)) = NaN;
-tic
 [m,n] = size(allData);
 
 headers = 'time';
@@ -14,8 +13,8 @@ headers = headers';
 
 Xtime = zeros(m,1);
 for i = 1:m
-    Xtime(i) = j;
-    j = j + 10;
+    Xtime(i) = timestamp;
+    timestamp = timestamp + 10;
 end
 % set buffer for header row and time column
 data = zeros(m+1,n+1);
@@ -66,5 +65,4 @@ fid = fopen(filename,'w');
 fwrite(fid, str);
 fclose(fid);
 
-toc
 end

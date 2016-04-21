@@ -14,7 +14,7 @@ headers = headers';
 Xtime = zeros(m,1);
 for i = 1:m
     Xtime(i) = timestamp;
-    timestamp = timestamp + 10;
+    timestamp = timestamp + 1;%10;
 end
 % set buffer for header row and time column
 data = zeros(m+1,n+1);

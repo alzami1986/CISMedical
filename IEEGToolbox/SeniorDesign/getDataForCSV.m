@@ -53,21 +53,21 @@ for t = 558:numDataWindows
     %     A = low_pass_filter(A, sampleRate);
     % decimate each set of 5000 rows ( 450 times )
     numRows = reSampleRate*duration;
-    loop = duration*sampleRate;
-    for k = 1:5000:loop
-        for j = 1:dn % decimate each channel
-            dec_data(:,j) = decimate(data_clip(k:(k+4999),j),10);
-            downData(:,j) = decimate(dec_data(:,j),5);
-        end
-        index = ind + floor((k/5000))*100;
-        allData(index:index + 99,:) = downData;
-    end
+%     loop = duration*sampleRate;
+%     for k = 1:5000:loop
+%         for j = 1:dn % decimate each channel
+%             dec_data(:,j) = decimate(data_clip(k:(k+4999),j),10);
+%             downData(:,j) = decimate(dec_data(:,j),5);
+%         end
+%         index = ind + floor((k/5000))*100;
+%         allData(index:index + 99,:) = downData;
+%     end
     
-    %     numRows = reSampleRate*duration;
-    %     downSampledData = downsample(A, downSampleRate);
-    %     index = (t-1)*numRows + 1;
-    %     index = ind;
-    %     allData(index:index + (numRows - 1),:) = downSampledData;
+        numRows = reSampleRate*duration;
+        downSampledData = downsample(A, downSampleRate);
+%         index = (t-1)*numRows + 1;
+        index = ind;
+        allData(index:index + (numRows - 1),:) = downSampledData;
     if(t==numDataWindows)
         allData = allData(1:index + (numRows - 1),:);
         %         allData(index+60000:end,:) = NaN;

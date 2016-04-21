@@ -1,5 +1,5 @@
 % start_time = 0;
-start_time = 334200;
+start_time = 559*600;
 duration = 600; % in seconds
 session = IEEGSession('I001_P002_D01', 'indaso', 'ind_ieeglogin');
 dataset = session.data;
@@ -10,15 +10,15 @@ numChannels = length(dataset.rawChannels);
 numMinutes = (duration/60);
 numWindows = duration/10;
 downSampleRate = 5;
-reSampleRate = 1000;
+reSampleRate = 5000;
 numRows = duration*reSampleRate;
 
 % csvTime = 558*60000*10;
-csvTime = 560*600000; % begin of seizure with ms timestamp
+csvTime = start_time*1000; % begin of seizure with ms timestamp
 seizure_length = dataset.rawChannels(1).get_tsdetails.getDuration / 1e6;
 % numDataWindows = floor(seizure_length / duration);
-numDataWindows = 560+32;
-maxDataRows = 1200000;
+numDataWindows = 560;
+maxDataRows = 3000000;
 allData = NaN(maxDataRows, numChannels);
 ind = 1;
 
@@ -68,10 +68,10 @@ for t = 560:numDataWindows
 
     % regular code
 %         numRows = reSampleRate*duration;
-        downSampledData = downsample(A, downSampleRate);
+%         downSampledData = downsample(A, downSampleRate);
 %         index = (t-1)*numRows + 1;
         index = ind;
-        allData(index:index + (numRows - 1),:) = downSampledData;
+        allData(index:index + (numRows - 1),:) = A;
 %     numRows = reSampleRate*duration;
 %     allData(index:index + (numRows - 1),:) = A;
     
